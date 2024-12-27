@@ -10,7 +10,9 @@ const login = require("./login");
 const registro = require("./registro");
 const { obtenerUsuarios, eliminarUsuarios } = require("./usuarios");
 const validar = require("./validar");
+const connection = require("./conexion");
 const saltRounds = 10;
+const MySQLStore = require("express-mysql-session")(session);
 //root:dJuxoKBWvSUpWIZHjdVEZtYbJVAAMTmN@autorack.proxy.rlwy.net:32376/railway
 
 mysql: app.use(
@@ -19,6 +21,10 @@ mysql: app.use(
     credentials: true,
   })
 );
+
+const sessionStore = new MySQLStore({} /* session store options */, connection);
+
+
 app.use(
   session({
     secret: process.env.SECRETSESSION || "secretjajaja",
@@ -26,7 +32,8 @@ app.use(
     cookie: {
       secure: process.env.MODE_ENV === "production",
       sameSite: "none",
-    },
+      },
+    store: sessionStore,
   })
 );
 
