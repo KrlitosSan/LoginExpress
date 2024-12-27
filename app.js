@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 // Get the client
 const cors = require("cors");
 const session = require("express-session");
@@ -11,8 +11,9 @@ const registro = require("./registro");
 const { obtenerUsuarios, eliminarUsuarios } = require("./usuarios");
 const validar = require("./validar");
 const saltRounds = 10;
+//root:dJuxoKBWvSUpWIZHjdVEZtYbJVAAMTmN@autorack.proxy.rlwy.net:32376/railway
 
-app.use(
+mysql: app.use(
   cors({
     origin: process.env.URLFRONTEND || "http://localhost:5173",
     credentials: true,
@@ -28,7 +29,6 @@ app.use(
     },
   })
 );
-
 
 // Create the connection to database
 
