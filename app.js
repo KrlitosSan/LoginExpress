@@ -14,15 +14,21 @@ const saltRounds = 10;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.URLFRONTEND || "http://localhost:5173",
     credentials: true,
   })
 );
 app.use(
   session({
-    secret: "secretjajaja",
+    secret: process.env.SECRETSESSION || "secretjajaja",
+    proxy: process.env.MODE_ENV === "production",
+    cookie: {
+      secure: process.env.MODE_ENV === "production",
+      sameSite: "none",
+    },
   })
 );
+
 
 // Create the connection to database
 
