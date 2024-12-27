@@ -1,4 +1,7 @@
 const mysql = require("mysql2/promise");
+//root:dJuxoKBWvSUpWIZHjdVEZtYbJVAAMTmN@autorack.proxy.rlwy.net:32376/railway
+
+
 const connection = mysql.createPool({
   host: process.env.HOSTDB || "localhost",
   user: process.env.USERDB || "root",
