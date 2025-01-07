@@ -2,7 +2,6 @@ const connection = require("./conexion");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-
 const registro = async (req, res) => {
   if (!req.session.usuario) {
     res.status(401).send("Inicio de sesion incorrecto");
